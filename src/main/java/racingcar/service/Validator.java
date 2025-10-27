@@ -1,15 +1,20 @@
 package racingcar.service;
-import java.util.List;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Validator {
 
     public void validateCarNames(List<String> carNames) {
         validateNotEmpty(carNames);
+        Set<String> uniqueNames = new HashSet<>();
         
         for (String rawName : carNames) {
             String name = sanitizeName(rawName);
             validateName(name);
+            validateUniqueName(name, uniqueNames);
+            uniqueNames.add(name);
         }
     }
 
@@ -62,6 +67,12 @@ public class Validator {
         return c == '\u202A' || c == '\u202B' || c == '\u202C' || 
                c == '\u202D' || c == '\u202E' || c == '\u2066' || c == '\u2067' || 
                c == '\u2068' || c == '\u2069';
+    }
+
+    private void validateUniqueName(String name, Set<String> uniqueNames) {
+        if (uniqueNames.contains(name)) {
+            throw new IllegalArgumentException("[ERROR] 중복된 자동차 이름입니다: " + name);
+        }
     }
 
     private void validateNotEmpty(List<String> carNames) {

@@ -7,10 +7,7 @@ import java.util.Map;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class Race {
-    private static final int MIN_RANDOM = 0;
-    private static final int MAX_RANDOM = 9;
-    private static final int MOVING_THRESHOLD = 4;
-
+    
     private final Map<String, Integer> carPositions;
 
     public Race(List<String> carNames) {
@@ -49,14 +46,14 @@ public class Race {
     }
 
     private void tryMove(String name) {
-        int randomValue = Randoms.pickNumberInRange(MIN_RANDOM, MAX_RANDOM);
+        int randomValue = Randoms.pickNumberInRange(0,9);
         if (shouldMove(randomValue)) {
             carPositions.put(name, carPositions.get(name) + 1);
         }
     }
 
     private boolean shouldMove(int randomValue) {
-        return randomValue >= MOVING_THRESHOLD;
+        return randomValue >= 4;
     }
 
     public Map<String, Integer> getCarPositions() {

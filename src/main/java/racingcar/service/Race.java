@@ -59,16 +59,8 @@ public class Race {
         return randomValue >= MOVING_THRESHOLD;
     }
 
-    public List<String> getRoundResult() {
-        List<String> results = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : carPositions.entrySet()) {
-            results.add(formatCarResult(entry.getKey(), entry.getValue()));
-        }
-        return results;
-    }
-
-    private String formatCarResult(String name, int position) {
-        return name + " : " + "-".repeat(position);
+    public Map<String, Integer> getCarPositions() {
+        return new LinkedHashMap<>(carPositions);
     }
 
     public List<String> getWinners() {

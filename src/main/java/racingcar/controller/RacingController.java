@@ -3,21 +3,27 @@ package racingcar.controller;
 import java.util.Arrays;
 import java.util.List;
 import racingcar.service.Race;
+import racingcar.service.Validator;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
 public class RacingController {
     private final InputView inputView;
     private final OutputView outputView;
+    private final Validator validator;
 
     public RacingController() {
         inputView = new InputView();
         outputView = new OutputView();
+        validator = new Validator();
     }
 
     public void run() {
         List<String> carNames = readCarNames();
+        validator.validateCarNames(carNames);
+        
         int attempts = readAttempts();
+        validator.validateAttempts(attempts);
         
         Race race = new Race(carNames);
         

@@ -16,26 +16,8 @@ public class Race {
     }
 
     private void initializeCars(List<String> carNames) {
-        for (String rawName : carNames) {
-            String name = sanitizeName(rawName);
-            validateName(name);
+        for (String name : carNames) {
             carPositions.put(name, 0);
-        }
-    }
-
-    private String sanitizeName(String name) {
-        if (name == null) {
-            return "";
-        }
-        return name.trim();
-    }
-
-    private void validateName(String name) {
-        if (name.isEmpty()) {
-            throw new IllegalArgumentException("자동차 이름은 비어 있을 수 없습니다.");
-        }
-        if (name.length() > 5) {
-            throw new IllegalArgumentException("자동차 이름은 5자를 초과할 수 없습니다.");
         }
     }
 
